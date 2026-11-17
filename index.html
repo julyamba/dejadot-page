@@ -498,7 +498,7 @@ footer a:hover { color: var(--you); }
       <h2>Five seconds at a time.</h2>
       <p>Echo is installed from an APK file. It needs Android 7.0 or newer and takes about 1.5 MB.</p>
       <div class="cta">
-        <a class="btn btn-primary" id="apkBtn" href="https://github.com/julyamba/echo/releases/latest" rel="noopener">
+        <a class="btn btn-primary" id="apkBtn" href="https://github.com/julyamba/echo-page/releases/latest" rel="noopener">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>
           Download the APK
         </a>
@@ -517,7 +517,7 @@ footer a:hover { color: var(--you); }
 <footer>
   <div class="wrap">
     <span>Echo · a one-thumb arcade game for Android</span>
-    <span><a href="https://github.com/julyamba/echo" rel="noopener">GitHub</a> · <a href="#top">Back to top</a></span>
+    <span><a href="https://github.com/julyamba/echo-page" rel="noopener">GitHub</a> · <a href="#top">Back to top</a></span>
   </div>
 </footer>
 
@@ -584,7 +584,7 @@ footer a:hover { color: var(--you); }
   // Links straight to the APK in the newest release; falls back to the releases page.
   var apkBtn = document.getElementById('apkBtn');
   if (apkBtn && window.fetch) {
-    fetch('https://api.github.com/repos/julyamba/echo/releases/latest')
+    fetch('https://api.github.com/repos/julyamba/echo-page/releases/latest')
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (rel) {
         if (!rel || !rel.assets) return;
