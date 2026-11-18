@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Echo — dodge yourself</title>
-<meta name="description" content="Echo is a one-thumb arcade game for Android. Grab the coin in five seconds, then do it again while every run you have made replays around you. No ads, no account, works offline.">
+<title>Dejadot — dodge yourself</title>
+<meta name="description" content="Dejadot is a one-thumb arcade game for Android. Grab the coin in five seconds, then do it again while every run you have made replays around you. No ads, no account, works offline.">
 <meta name="theme-color" content="#0E1124">
-<meta property="og:title" content="Echo — dodge yourself">
-<meta property="og:description" content="A one-thumb arcade game for Android where every round you clear comes back as an echo you must not touch.">
+<meta property="og:title" content="Dejadot — dodge yourself">
+<meta property="og:description" content="A one-thumb arcade game for Android where every round you clear comes back as a shadow you must not touch.">
 <meta property="og:image" content="app-icon.png">
 <link rel="icon" type="image/png" href="app-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -188,7 +188,7 @@ p { text-wrap: pretty; }
 
 /* Get it */
 .final { padding-block: 96px 72px !important; }
-.final .top { display: flex; align-items: center; gap: 22px; margin-bottom: 30px; }
+.final .top { display: flex; flex-wrap: wrap; align-items: center; gap: 22px; margin-bottom: 30px; }
 .final img { width: 92px; height: 92px; border-radius: 22px; box-shadow: 0 18px 44px -18px rgba(0,0,0,.7); }
 .final h2 { font-size: clamp(56px, 9vw, 132px); }
 .final h2 em { font-style: normal; color: var(--you); }
@@ -248,18 +248,18 @@ footer a:hover { color: var(--you); }
 
   <!-- ============ the game ============ -->
   <aside class="play" aria-label="Playable demo">
-    <a class="brand" href="#top" aria-label="Echo, back to top"><span aria-hidden="true"><i></i><i></i><i></i></span>Echo</a>
+    <a class="brand" href="#top" aria-label="Dejadot, back to top"><span aria-hidden="true"><i></i><i></i><i></i></span>Dejadot</a>
     <div class="board">
       <div class="hud">
         <span class="mono" id="gRound">Playable demo</span>
         <div class="stats">
           <div class="stat coins"><span class="mono dim">Coins</span><b id="gCoins">0</b></div>
-          <div class="stat echoes"><span class="mono dim">Echoes</span><b id="gEchoes">0</b></div>
+          <div class="stat echoes"><span class="mono dim">Shadows</span><b id="gEchoes">0</b></div>
           <div class="stat"><span class="mono dim">Best</span><b id="gBest">0</b></div>
         </div>
       </div>
       <div class="arena">
-        <canvas id="game" role="img" aria-label="Playable Echo demo. Steer the dot to the coin and avoid your echoes."></canvas>
+        <canvas id="game" role="img" aria-label="Playable Dejadot demo. Steer the dot to the coin and avoid your shadows."></canvas>
         <div class="overlay on" id="overlay"><div id="card"></div></div>
       </div>
       <div class="mono dim hint" id="gHint">The real game, running in your browser</div>
@@ -296,9 +296,9 @@ footer a:hover { color: var(--you); }
     <section class="round" id="r2">
       <div class="round-head"><span class="mono n">Round 02</span><span class="bar"><i></i></span></div>
       <h2>Then your past shows up.</h2>
-      <p>The exact path you just took <b>replays as an echo.</b> Same route, same timing, same hesitation at the corner.</p>
-      <p>Echoes are harmless for the first moments of a round, drawn as dashed rings. After that, touching one ends the run.</p>
-      <svg class="sketch" viewBox="0 0 560 150" role="img" aria-label="An echo retracing the previous path while the player heads for a new coin">
+      <p>The exact path you just took <b>comes back as a shadow.</b> Same route, same timing, same hesitation at the corner.</p>
+      <p>Shadows are harmless for the first moments of a round, drawn as dashed rings. After that, touching one ends the run.</p>
+      <svg class="sketch" viewBox="0 0 560 150" role="img" aria-label="A shadow retracing the previous path while the player heads for a new coin">
         <path d="M70,104 C170,128 240,30 470,52" fill="none" stroke="var(--ghost)" stroke-opacity=".3" stroke-width="3" stroke-linecap="round"/>
         <circle cx="245" cy="72" r="12" fill="var(--ghost)"/>
         <path d="M470,52 C420,110 300,130 150,40" fill="none" stroke="var(--you)" stroke-opacity=".4" stroke-width="4" stroke-linecap="round" stroke-dasharray="1 12"/>
@@ -312,9 +312,9 @@ footer a:hover { color: var(--you); }
     <section class="round" id="r3">
       <div class="round-head"><span class="mono n">Round 03</span><span class="bar"><i></i></span></div>
       <h2>And it never leaves.</h2>
-      <p>Every round you clear adds <b>one more echo.</b> By round ten you are threading through nine copies of yourself, and each careless detour you ever made is still out there.</p>
-      <p>Faint lines show where every echo will travel, so the skill is planning a route that your future self can live with.</p>
-      <svg class="sketch" viewBox="0 0 560 150" role="img" aria-label="Many echo paths crossing the arena with the player between them">
+      <p>Every round you clear adds <b>one more shadow.</b> By round ten you are threading through nine copies of yourself, and each careless detour you ever made is still out there.</p>
+      <p>Faint lines show where every shadow will travel, so the skill is planning a route that your future self can live with.</p>
+      <svg class="sketch" viewBox="0 0 560 150" role="img" aria-label="Many shadow paths crossing the arena with the player between them">
         <g fill="none" stroke="var(--ghost)" stroke-opacity=".28" stroke-width="3" stroke-linecap="round">
           <path d="M40,110 C160,130 240,30 520,50"/>
           <path d="M520,50 C420,120 300,130 110,30"/>
@@ -356,17 +356,17 @@ footer a:hover { color: var(--you); }
         <div><dt>Does it need internet or an account?</dt><dd>No. There is no sign-in and the app has no internet access. Everything stays on your phone.</dd></div>
         <div><dt>Are there ads or purchases?</dt><dd>No ads and nothing to buy.</dd></div>
         <div><dt>Is the daily really the same for everyone?</dt><dd>Yes. The coin positions come from the date. Scores are not compared online; it is your own streak and your own best.</dd></div>
-        <div><dt>Why did I lose while standing still?</dt><dd>Your newest echo ends exactly where you finished the last round, which is where you are standing. Move during the dashed-ring moments.</dd></div>
+        <div><dt>Why did I lose while standing still?</dt><dd>Your newest shadow ends exactly where you finished the last round, which is where you are standing. Move during the dashed-ring moments.</dd></div>
         <div><dt>What if I uninstall?</dt><dd>Progress is stored only on the phone, so it can be lost unless Android's own app backup restores it.</dd></div>
-        <div><dt>Is there an iPhone version?</dt><dd>Not at the moment. Echo is Android only.</dd></div>
+        <div><dt>Is there an iPhone version?</dt><dd>Not at the moment. Dejadot is Android only.</dd></div>
       </dl>
     </section>
 
     <section class="round final" id="get">
       <div class="round-head"><span class="mono n">Final round</span><span class="bar"><i></i></span></div>
       <div class="top">
-        <img src="app-icon.png" alt="Echo app icon" width="92" height="92">
-        <h2>Get <em>Echo.</em></h2>
+        <img src="app-icon.png" alt="Dejadot app icon" width="92" height="92">
+        <h2>Get <em>Dejadot.</em></h2>
       </div>
       <a class="btn" id="apkBtn" href="https://github.com/julyamba/echo-page/releases/latest" rel="noopener">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>
@@ -386,7 +386,7 @@ footer a:hover { color: var(--you); }
     </section>
 
     <footer>
-      <span class="mono">Echo · a one-thumb arcade game for Android</span>
+      <span class="mono">Dejadot · a one-thumb arcade game for Android</span>
       <span class="mono"><a href="https://github.com/julyamba/echo-page" rel="noopener">GitHub</a> · <a href="#top">Back to top</a></span>
     </footer>
 
@@ -522,13 +522,13 @@ footer a:hover { color: var(--you); }
 
   function showCard(html) { card.innerHTML = html; overlay.classList.add('on'); }
   function showTitle() {
-    showCard('<h3>Echo</h3><p>Grab the coin. Your last run comes back as an echo.</p>' +
+    showCard('<h3>Dejadot</h3><p>Grab the coin. Your last run comes back as a shadow.</p>' +
       '<span class="go">' + (coarse ? 'Tap to play' : 'Click to play') + '</span>');
   }
   function showOver() {
     if (state !== 'over') return;
     showCard('<span class="mono why">' +
-      (cause === 'echo' ? 'Caught by your echo from round ' + (killer + 1) : 'Out of time') + '</span>' +
+      (cause === 'echo' ? 'Caught by your shadow from round ' + (killer + 1) : 'Out of time') + '</span>' +
       '<div class="big">' + score + '</div><span class="mono dim">' + (score === 1 ? 'coin' : 'coins') + '</span>' +
       '<span class="go">' + (coarse ? 'Tap to retry' : 'Click to retry') + '</span>');
   }
@@ -695,7 +695,7 @@ footer a:hover { color: var(--you); }
       ctx.font = '500 3.6px "JetBrains Mono", monospace';
       ctx.fillStyle = rgba(ghosts.length ? C.ghost : C.muted, a);
       var n = ghosts.length;
-      ctx.fillText(n === 0 ? 'NO ECHOES YET' : n === 1 ? '1 ECHO WILL FOLLOW YOU' : n + ' ECHOES WILL FOLLOW YOU', 50, 74);
+      ctx.fillText(n === 0 ? 'NO SHADOWS YET' : n === 1 ? '1 SHADOW WILL FOLLOW YOU' : n + ' SHADOWS WILL FOLLOW YOU', 50, 74);
     }
   }
 
