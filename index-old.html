@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Echo — dodge yourself</title>
-<meta name="description" content="Echo is a one-thumb arcade game for Android. Grab the coin in five seconds, then do it again while every run you have made replays around you. No ads, no account, works offline.">
+<title>Dejadot — dodge yourself</title>
+<meta name="description" content="Dejadot is a one-thumb arcade game for Android. Grab the coin in five seconds, then do it again while every run you have made replays around you as a shadow. Two modes, 16 themes, no ads, no account, works offline.">
 <meta name="theme-color" content="#0E1124">
-<meta property="og:title" content="Echo — dodge yourself">
-<meta property="og:description" content="A one-thumb arcade game for Android where every round you clear comes back as an echo you must not touch.">
+<meta property="og:title" content="Dejadot — dodge yourself">
+<meta property="og:description" content="A one-thumb arcade game for Android where every round you clear comes back as a shadow you must not touch.">
 <meta property="og:image" content="app-icon.png">
 <link rel="icon" type="image/png" href="app-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -208,14 +208,14 @@ section { padding: 88px 0; }
 }
 .theme-panel h2 { font-size: clamp(30px, 3.8vw, 44px); margin: 12px 0 14px; }
 .theme-panel p { color: var(--muted); }
-.swatches { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; position: relative; z-index: 1; }
+.swatches { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; position: relative; z-index: 1; }
 .swatch {
   display: grid; gap: 9px; padding: 8px 8px 10px; border-radius: 18px; cursor: pointer; text-align: left;
   border: 1.5px solid var(--grid); background: var(--ink); color: var(--muted);
   font: inherit; font-size: 14px; transition: transform .2s, border-color .2s, color .2s, background .35s;
 }
 .swatch:hover { transform: translateY(-3px); }
-.swatch .mini { position: relative; height: 62px; border-radius: 11px; background: var(--s-ink); overflow: hidden; }
+.swatch .mini { position: relative; height: 52px; border-radius: 11px; background: var(--s-ink); overflow: hidden; }
 .swatch .mini i { position: absolute; border-radius: 50%; width: 13px; height: 13px; }
 .swatch .mini i:nth-child(1) { left: 16%; top: 58%; background: var(--s-ghost); opacity: .5; }
 .swatch .mini i:nth-child(2) { left: 36%; top: 34%; background: var(--s-ghost); }
@@ -224,6 +224,35 @@ section { padding: 88px 0; }
 .swatch span { padding: 0 4px; }
 .swatch small { display: block; font-family: var(--mono); font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase; font-weight: 500; }
 .swatch[aria-pressed="true"] { border-color: var(--you); color: var(--text); }
+
+/* ---------- shadow draft ---------- */
+.draft-intro { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-bottom: 34px; }
+.draft-intro .step::before { content: none; }
+.draft-intro .step h3 { margin-top: 0; }
+.deck { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; }
+.dcard {
+  --t: var(--panel);
+  padding: 16px 16px 18px; border-radius: 18px;
+  background: color-mix(in srgb, var(--t) 16%, var(--panel));
+  display: grid; gap: 6px; align-content: start; transition: transform .25s ease, background .35s;
+}
+.dcard:hover { transform: translateY(-3px); }
+.dcard.high { --t: var(--danger); }
+.dcard.medium { --t: var(--ghost); }
+.dcard.helps { --t: var(--you); }
+.dcard.none { --t: var(--muted); }
+.dcard h3 { font-size: 19px; letter-spacing: -.02em; }
+.dcard p { color: var(--muted); font-size: 14px; line-height: 1.4; }
+.dcard .meta { display: flex; flex-wrap: wrap; gap: 4px 10px; margin-top: 4px; }
+.dcard .meta span { font-family: var(--mono); font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; }
+.dcard .risk { color: var(--muted); }
+.dcard.high .risk { color: var(--danger); }
+.dcard.medium .risk { color: var(--ghost); }
+.dcard.helps .risk { color: var(--you); }
+.dcard .up { color: var(--coin); }
+.dcard .down { color: var(--danger); }
+.dcard .rar { font-family: var(--mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--you); }
+.dcard .rar.legend { color: var(--coin); }
 
 /* ---------- faq ---------- */
 .two-col { display: grid; grid-template-columns: .85fr 1.15fr; gap: 48px; align-items: start; }
@@ -276,7 +305,8 @@ footer a:hover { color: var(--you); }
 @media (max-width: 900px) {
   .hero { padding: 40px 0 64px; }
   .hero .wrap, .theme-panel, .two-col { grid-template-columns: 1fr; }
-  .steps, .install ol { grid-template-columns: 1fr; }
+  .steps, .install ol, .draft-intro { grid-template-columns: 1fr; }
+  .swatches { grid-template-columns: repeat(3, 1fr); }
   .card, .card.wide { grid-column: span 3; }
   .nav-links { display: none; }
   section { padding: 64px 0; }
@@ -286,6 +316,7 @@ footer a:hover { color: var(--you); }
   .card, .card.wide { grid-column: span 6; }
   .btn { width: 100%; justify-content: center; }
   .swatches { grid-template-columns: repeat(2, 1fr); }
+  .deck { grid-template-columns: 1fr 1fr; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -298,12 +329,13 @@ footer a:hover { color: var(--you); }
 
 <header class="nav">
   <div class="wrap">
-    <a class="brand" href="#top" aria-label="Echo home">
+    <a class="brand" href="#top" aria-label="Dejadot home">
       <span class="mark" aria-hidden="true"><i></i><i></i><i></i></span>
-      Echo
+      Dejadot
     </a>
     <nav class="nav-links" aria-label="Sections">
       <a href="#how">How it works</a>
+      <a href="#draft">Shadow Draft</a>
       <a href="#features">Features</a>
       <a href="#themes">Themes</a>
       <a href="#faq">Questions</a>
@@ -320,7 +352,7 @@ footer a:hover { color: var(--you); }
     <div>
       <p class="eyebrow reveal">One-thumb arcade game for Android</p>
       <h1 class="reveal" style="--i:1">Dodge<br><span>yourself.</span></h1>
-      <p class="lede reveal" style="--i:2">Grab the coin in five seconds. Then do it again while every run you have made replays around you as an echo. Touch one and it is over.</p>
+      <p class="lede reveal" style="--i:2">Grab the coin in five seconds. Then do it again while every run you have made replays around you as a shadow. Touch one and it is over. Play it straight in Classic, or pick how each shadow comes back in Shadow Draft.</p>
       <div class="cta reveal" style="--i:3">
         <a class="btn btn-primary" href="#install">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>
@@ -329,7 +361,7 @@ footer a:hover { color: var(--you); }
         <a class="btn btn-ghost" href="#how">How it works</a>
       </div>
       <div class="chips reveal" style="--i:4">
-        <span class="chip"><b>1.5 MB</b> download</span>
+        <span class="chip"><b>1.6 MB</b> download</span>
         <span class="chip">No ads</span>
         <span class="chip">No account</span>
         <span class="chip">Works offline</span>
@@ -344,18 +376,18 @@ footer a:hover { color: var(--you); }
             <span class="mode" id="gRound">Classic</span>
             <div class="stats">
               <div class="stat coins"><span class="label">Coins</span><b id="gCoins">0</b></div>
-              <div class="stat echoes"><span class="label">Echoes</span><b id="gEchoes">0</b></div>
+              <div class="stat echoes"><span class="label">Shadows</span><b id="gEchoes">0</b></div>
               <div class="stat"><span class="label">Best</span><b id="gBest">0</b></div>
             </div>
           </div>
           <div class="arena">
-            <canvas id="game" role="img" aria-label="Playable Echo demo. Steer the dot to the coin and avoid your echoes."></canvas>
+            <canvas id="game" role="img" aria-label="Playable Dejadot demo. Steer the dot to the coin and avoid your shadows."></canvas>
             <div class="overlay on" id="overlay"><div id="card"></div></div>
           </div>
           <div class="label hint" id="gHint">Playable demo</div>
         </div>
       </div>
-      <p class="stage-note">This is the real game, running in your browser. Move the mouse over it, or drag with a finger.</p>
+      <p class="stage-note">This is Classic mode, running in your browser. Move the mouse over it, or drag with a finger.</p>
     </div>
   </div>
 </div>
@@ -374,13 +406,53 @@ footer a:hover { color: var(--you); }
         <p>A coin appears somewhere in the arena. Drag anywhere on the screen to steer your dot to it before the timer bar runs out.</p>
       </article>
       <article class="step reveal" style="--i:1">
-        <h3>Echo</h3>
-        <p>Clear the round and your exact path replays as an echo in the next one. Faint lines show where every echo is going to travel.</p>
+        <h3>Shadow</h3>
+        <p>Clear the round and your exact path replays as a shadow in the next one. Faint lines show where every shadow is going to travel.</p>
       </article>
       <article class="step reveal" style="--i:2">
         <h3>Survive</h3>
-        <p>One more echo joins each round. Take the coin without touching any of them, then stay clear until the five seconds are up.</p>
+        <p>One more shadow joins each round. Take the coin without touching any of them, then stay clear until the five seconds are up.</p>
       </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SHADOW DRAFT ================= -->
+<section id="draft">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">New mode · Shadow Draft</p>
+      <h2>Pick how your past comes back.</h2>
+      <p>After every round you clear, three cards are dealt. The one you pick changes your new shadow, the next round or the rest of the run. Every card has its own look in the arena, so you always know what is coming.</p>
+    </div>
+    <div class="draft-intro">
+      <article class="step reveal">
+        <h3>Risk pays</h3>
+        <p>Risky cards raise your multiplier for the whole run, and every coin pays the multiplier. Safe cards keep you alive but lower it by one.</p>
+      </article>
+      <article class="step reveal" style="--i:1">
+        <h3>No safe coins</h3>
+        <p>In Shadow Draft the coin does not look for a quiet spot. It can sit right on a busy route, and you still have to go and get it.</p>
+      </article>
+      <article class="step reveal" style="--i:2">
+        <h3>Curse drafts</h3>
+        <p>Every fifth round, only high-danger cards are dealt. Wait too long to choose and the riskiest card is picked for you.</p>
+      </article>
+    </div>
+    <div class="deck reveal">
+        <article class="dcard low"><h3>Late</h3><p>Your shadow starts a second late.</p><div class="meta"><span class="risk">Low danger</span><span class="up">Mult +1</span></div></article>
+        <article class="dcard low"><h3>Fade</h3><p>Your shadow is harmless for its first 2 seconds.</p><div class="meta"><span class="risk">Low danger</span><span class="up">Mult +1</span></div></article>
+        <article class="dcard medium"><h3>Mirror</h3><p>Your shadow comes back flipped left to right.</p><div class="meta"><span class="risk">Medium danger</span><span class="up">Mult +2</span></div></article>
+        <article class="dcard medium"><h3>Reverse</h3><p>Your shadow runs its path backwards, from where you stand.</p><div class="meta"><span class="risk">Medium danger</span><span class="up">Mult +2</span></div></article>
+        <article class="dcard high"><h3>Fast</h3><p>Your shadow moves 25% faster.</p><div class="meta"><span class="risk">High danger</span><span class="up">Mult +3</span></div></article>
+        <article class="dcard high"><h3>Giant</h3><p>Your shadow comes back 50% bigger.</p><div class="meta"><span class="risk">High danger</span><span class="up">Mult +3</span></div></article>
+        <article class="dcard high"><h3>Twin</h3><p>Your shadow comes back as two, side by side.</p><div class="meta"><span class="risk">High danger</span><span class="up">Mult +3</span></div></article>
+        <article class="dcard none"><h3>Seal</h3><p>No new shadow, but the next coin is worth nothing.</p><div class="meta"><span class="risk">No shadow</span><span class="down">Mult -1</span><span class="up">Next coin 0</span></div></article>
+        <article class="dcard helps"><span class="rar">Uncommon</span><h3>Tired Shadows</h3><p>Every shadow moves at 70% speed next round.</p><div class="meta"><span class="risk">Helps you</span><span class="down">Mult -1</span></div></article>
+        <article class="dcard high"><span class="rar">Uncommon</span><h3>Hunter</h3><p>Your shadow bends off its path toward you.</p><div class="meta"><span class="risk">High danger</span><span class="up">Mult +3</span></div></article>
+        <article class="dcard high"><span class="rar">Uncommon</span><h3>Double or Nothing</h3><p>The next coin pays double, but the round lasts only 4 seconds.</p><div class="meta"><span class="risk">High danger</span><span class="risk">Mult +0</span><span class="up">Next coin x2</span></div></article>
+        <article class="dcard helps"><span class="rar">Rare</span><h3>Extra Life</h3><p>Survive the next time a shadow catches you.</p><div class="meta"><span class="risk">Helps you</span><span class="down">Mult -1</span></div></article>
+        <article class="dcard high"><span class="rar legend">Legendary</span><h3>Jackpot</h3><p>The next coin pays x5, but your shadow comes back Fast and Giant.</p><div class="meta"><span class="risk">High danger</span><span class="up">Mult +3</span><span class="up">Next coin x5</span></div></article>
     </div>
   </div>
 </section>
@@ -394,30 +466,30 @@ footer a:hover { color: var(--you); }
       <p>No sign-in, no ads, no setup. Open it and play.</p>
     </div>
     <div class="bento">
-      <article class="card wide reveal">
+      <article class="card wide reveal" style="--c: var(--ghost)">
+        <div class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="7" height="12" rx="1.6"/><rect x="8.5" y="4.5" width="7" height="12" rx="1.6"/><rect x="14" y="6" width="7" height="12" rx="1.6"/></svg></div>
+        <h3>Two ways to play</h3>
+        <p>Classic is the pure game: every shadow replays your path exactly. Shadow Draft deals three cards after each round, with 13 cards to learn and a Card library that shows what each one does.</p>
+      </article>
+      <article class="card wide reveal" style="--i:1">
         <div class="ico"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4M9 15l2 2 4-4"/></svg></div>
         <h3>A daily challenge</h3>
         <p>One run a day with the same coin positions for every player. Only your first attempt is scored, then it turns into practice. Keep a streak going by coming back tomorrow.</p>
       </article>
-      <article class="card wide reveal" style="--i:1; --c: var(--ghost)">
-        <div class="ico"><svg viewBox="0 0 24 24"><path d="M9 11V5.5a1.5 1.5 0 0 1 3 0V11m0-1.5a1.5 1.5 0 0 1 3 0V12m0-1a1.5 1.5 0 0 1 3 0v4.5a5.5 5.5 0 0 1-5.5 5.5H12a5 5 0 0 1-4.2-2.3L5 14.5a1.4 1.4 0 0 1 2.2-1.7L9 14.5"/></svg></div>
-        <h3>Drag anywhere to steer</h3>
-        <p>Steering is relative, so your thumb never has to cover the dot. The dot stops the moment your finger does, and five sensitivity levels let you tune how far it travels.</p>
-      </article>
       <article class="card reveal" style="--c: var(--coin)">
         <div class="ico"><svg viewBox="0 0 24 24"><circle cx="8" cy="15" r="3.5"/><circle cx="16" cy="8.5" r="3.5"/><circle cx="17.5" cy="18" r="1.8"/></svg></div>
-        <h3>Six themes to unlock</h3>
-        <p>Reach 5, 10, 15, 20 and 30 coins in one run to unlock new colours and trail styles.</p>
+        <h3>16 themes to unlock</h3>
+        <p>Every theme has its own coin target, from 5 to 25 in one run, with new colours, trails and animated dots.</p>
       </article>
       <article class="card reveal" style="--i:1">
         <div class="ico"><svg viewBox="0 0 24 24"><path d="M5 20V10M10 20V4M15 20v-7M20 20v-12"/></svg></div>
         <h3>Stats and achievements</h3>
-        <p>Best scores, averages, close calls, your last 30 runs, and 12 achievements to chase.</p>
+        <p>Best scores for each mode, averages, close calls, your last 30 runs, and 15 achievements to chase.</p>
       </article>
       <article class="card reveal" style="--i:2; --c: var(--danger)">
         <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/><circle cx="12" cy="12" r="4.5"/></svg></div>
         <h3>Close calls count</h3>
-        <p>Skim past an echo and the game notices, with a tick you can feel and a tally in your stats.</p>
+        <p>Skim past a shadow and the game notices, with a tick you can feel and a tally in your stats.</p>
       </article>
       <article class="card reveal" style="--c: var(--ghost)">
         <div class="ico"><svg viewBox="0 0 24 24"><path d="M4 14v-4h3l5-4v12l-5-4zM16 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11"/></svg></div>
@@ -434,6 +506,16 @@ footer a:hover { color: var(--you); }
         <h3>Pauses when life interrupts</h3>
         <p>Leave the app mid-round and the run waits for you, with a 3-2-1 countdown when you return.</p>
       </article>
+      <article class="card wide reveal" style="--c: var(--ghost)">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M9 11V5.5a1.5 1.5 0 0 1 3 0V11m0-1.5a1.5 1.5 0 0 1 3 0V12m0-1a1.5 1.5 0 0 1 3 0v4.5a5.5 5.5 0 0 1-5.5 5.5H12a5 5 0 0 1-4.2-2.3L5 14.5a1.4 1.4 0 0 1 2.2-1.7L9 14.5"/></svg></div>
+        <h3>Drag anywhere to steer</h3>
+        <p>Steering is relative, so your thumb never has to cover the dot. The dot stops the moment your finger does, and five sensitivity levels let you tune how far it travels.</p>
+      </article>
+      <article class="card wide reveal" style="--i:1; --c: var(--coin)">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3v11M8 10l4 4 4-4"/><path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg></div>
+        <h3>Back up your progress</h3>
+        <p>Save your scores, stats and unlocks to a file you choose, such as one in Documents or Google Drive. It updates itself after every run, and Restore brings everything back on a new phone.</p>
+      </article>
     </div>
   </div>
 </section>
@@ -444,8 +526,8 @@ footer a:hover { color: var(--you); }
     <div class="theme-panel reveal">
       <div>
         <p class="eyebrow">Themes</p>
-        <h2>Six looks. Try them on this page.</h2>
-        <p>These are the app's own themes. In the game you earn them by score; here you can just pick one, and the whole page, including the demo above, changes with it.</p>
+        <h2>Sixteen looks. Try them on this page.</h2>
+        <p>These are the app's own colours. In the game you unlock each one by collecting enough coins in a single run, and many also change your dot: a fireball, a snowflake, a shuriken, orbiting moons. Here you can just pick one, and the whole page, including the demo above, changes with it.</p>
       </div>
       <div class="swatches" id="swatches" role="group" aria-label="Theme"></div>
     </div>
@@ -458,7 +540,7 @@ footer a:hover { color: var(--you); }
     <div class="sec-head reveal" style="margin-bottom:0">
       <p class="eyebrow">Good to know</p>
       <h2>Straight answers.</h2>
-      <p>Echo is a small offline game. Here is what it does and does not do.</p>
+      <p>Dejadot is a small offline game. Here is what it does and does not do.</p>
     </div>
     <div class="reveal" style="--i:1">
       <details open>
@@ -475,15 +557,23 @@ footer a:hover { color: var(--you); }
       </details>
       <details>
         <summary>Why did I lose while standing still?</summary>
-        <p>Your last echo ends exactly where you finished the previous round, which is where you are standing. Echoes are harmless for the first moments of a round, shown as dashed rings, so use that time to move.</p>
+        <p>Your last shadow ends exactly where you finished the previous round, which is where you are standing. Shadows are harmless for the first moments of a round, shown as dashed rings, so use that time to move.</p>
+      </details>
+      <details>
+        <summary>What is Shadow Draft?</summary>
+        <p>A second mode. After each round you clear you pick one of three cards, and it changes how your new shadow comes back: later, mirrored, faster, bigger, doubled, or chasing you. Risky cards raise a multiplier that every coin pays out, so it has its own best score. The Card library in the app lists every card.</p>
+      </details>
+      <details>
+        <summary>How do I unlock themes?</summary>
+        <p>Collect coins in a single run. Each theme shows its own target, from 5 coins for Abyss to 25 for Aurora, and your best run counts.</p>
       </details>
       <details>
         <summary>What happens to my progress if I uninstall?</summary>
-        <p>Scores, unlocks and settings are stored only on the phone. Uninstalling or switching phones can lose them unless Android's own app backup restores them.</p>
+        <p>Scores, unlocks and settings are stored on the phone. Turn on Progress backup in Settings to keep a copy in a file you choose; it updates after every run. After reinstalling, tap Restore, pick the file, and everything comes back.</p>
       </details>
       <details>
         <summary>Is there an iPhone version?</summary>
-        <p>Not at the moment. Echo is Android only.</p>
+        <p>Not at the moment. Dejadot is Android only.</p>
       </details>
     </div>
   </div>
@@ -493,12 +583,12 @@ footer a:hover { color: var(--you); }
 <section id="install">
   <div class="wrap">
     <div class="install reveal">
-      <img src="app-icon.png" alt="Echo app icon" width="96" height="96">
+      <img src="app-icon.png" alt="Dejadot app icon" width="96" height="96">
       <p class="eyebrow">Install</p>
       <h2>Five seconds at a time.</h2>
-      <p>Echo is installed from an APK file. It needs Android 7.0 or newer and takes about 1.5 MB.</p>
+      <p>Dejadot is installed from an APK file. It needs Android 7.0 or newer and takes about 1.6 MB.</p>
       <div class="cta">
-        <a class="btn btn-primary" id="apkBtn" href="https://github.com/julyamba/echo-page/releases/latest" rel="noopener">
+        <a class="btn btn-primary" id="apkBtn" href="https://github.com/julyamba/dejadot-page/releases/latest" rel="noopener">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>
           Download the APK
         </a>
@@ -516,8 +606,8 @@ footer a:hover { color: var(--you); }
 
 <footer>
   <div class="wrap">
-    <span>Echo · a one-thumb arcade game for Android</span>
-    <span><a href="https://github.com/julyamba/echo-page" rel="noopener">GitHub</a> · <a href="#top">Back to top</a></span>
+    <span>Dejadot · a one-thumb arcade game for Android</span>
+    <span><a href="https://github.com/julyamba/dejadot-page" rel="noopener">GitHub</a> · <a href="#top">Back to top</a></span>
   </div>
 </footer>
 
@@ -537,16 +627,26 @@ footer a:hover { color: var(--you); }
   // ---------- themes: the same palettes as the app ----------
   // [name, unlock score, light?, ink, panel, grid, text, muted, you, ghost, coin, danger]
   var THEMES = [
-    ['Night',     0,  false, '#0E1124', '#151935', '#262B58', '#ECE9FF', '#8C90C2', '#FFB547', '#9D8CFF', '#7EF0D0', '#FF5D7A'],
-    ['Abyss',     5,  false, '#06181C', '#0A2329', '#17424B', '#E3FBFF', '#7FB0B8', '#FF9F6B', '#3FD6C6', '#FFE66D', '#FF5470'],
-    ['Ember',     10, false, '#170E0C', '#211410', '#47291F', '#FFEEE4', '#C29A8A', '#FFE08A', '#FF7847', '#6EE7F0', '#FF2E7E'],
-    ['Paper',     15, true,  '#EFEBE0', '#FAF8F1', '#D6D0BF', '#1C1B18', '#7D786B', '#E4572E', '#3A3A3A', '#1B998B', '#C1121F'],
-    ['Synthwave', 20, false, '#140B2D', '#1D1040', '#3B2372', '#F6EAFF', '#A88FD6', '#FFE44D', '#FF4FD8', '#4DF3FF', '#FF3B3B'],
-    ['Gilt',      30, false, '#0B0B0C', '#131314', '#2C2C30', '#F5F5F5', '#8F8F97', '#FFFFFF', '#D4AF37', '#7DF9A6', '#FF4D4D']
+    ['Night',      0,  false, '#0E1124', '#151935', '#262B58', '#ECE9FF', '#8C90C2', '#FFB547', '#9D8CFF', '#7EF0D0', '#FF5D7A'],
+    ['Abyss',      5,  false, '#06181C', '#0A2329', '#17424B', '#E3FBFF', '#7FB0B8', '#FF9F6B', '#3FD6C6', '#FFE66D', '#FF5470'],
+    ['Paper',      7,  true,  '#EFEBE0', '#FAF8F1', '#D6D0BF', '#1C1B18', '#7D786B', '#E4572E', '#3A3A3A', '#1B998B', '#C1121F'],
+    ['Sunset',     8,  false, '#1C0D1A', '#26111F', '#4A2340', '#FFEDE6', '#C895A8', '#FFB36B', '#B58CFF', '#5CF0C8', '#FF3D6E'],
+    ['Synthwave',  9,  false, '#140B2D', '#1D1040', '#3B2372', '#F6EAFF', '#A88FD6', '#FFE44D', '#FF4FD8', '#4DF3FF', '#FF3B3B'],
+    ['Orbit',      10, false, '#090B1C', '#0E1128', '#232850', '#EAF0FF', '#8B93C9', '#8AF3FF', '#FF8FB1', '#FFD166', '#FF3B5C'],
+    ['Arcade',     11, false, '#0A0A14', '#10101E', '#26264A', '#F0F0FF', '#8A8AB8', '#FFD23F', '#4DA6FF', '#5CFF7A', '#FF3B3B'],
+    ['Frost',      11, false, '#0A1620', '#0F1F2B', '#22394A', '#EEF9FF', '#8FB0C2', '#DDF6FF', '#8C9EFF', '#FF8FD1', '#FF4D5E'],
+    ['Tide',       13, false, '#03141F', '#061E2E', '#0F3A52', '#E3F7FF', '#7FB3C9', '#7FE3FF', '#6B8BA8', '#FFC94D', '#FF5A5A'],
+    ['Ember',      14, false, '#170E0C', '#211410', '#47291F', '#FFEEE4', '#C29A8A', '#FFC44D', '#A8968F', '#6EE7F0', '#FF2E7E'],
+    ['Rainbow',    15, false, '#0B0A16', '#121022', '#2A2645', '#F4F1FF', '#9A94C4', '#FFFFFF', '#9C95B8', '#FFD84D', '#FF4D6D'],
+    ['Sweetheart', 16, false, '#1A0B14', '#24101C', '#4A2238', '#FFE9F3', '#D292B4', '#FF5FA8', '#A894E0', '#FFE07A', '#FF2E4D'],
+    ['Ninja',      17, false, '#0A120D', '#0F1A13', '#22352A', '#E8F5EC', '#86A893', '#5CFF8A', '#A0A6AE', '#FFD45E', '#FF4D4D'],
+    ['Gilt',       18, false, '#0B0B0C', '#131314', '#2C2C30', '#F5F5F5', '#8F8F97', '#FFFFFF', '#D4AF37', '#7DF9A6', '#FF4D4D'],
+    ['Storm',      22, false, '#060A16', '#0A1020', '#1C2744', '#E6F0FF', '#8091B8', '#5CB8FF', '#8E96A8', '#FFE066', '#FF4D6D'],
+    ['Aurora',     25, false, '#040A12', '#07111D', '#15283A', '#E6FFF6', '#7FB0A5', '#9FFFE0', '#F0A868', '#FF6FB5', '#FF3B3B']
   ];
   var VARS = ['ink', 'panel', 'grid', 'text', 'muted', 'you', 'ghost', 'coin', 'danger'];
   var C = {};
-  var theme = Math.min(THEMES.length - 1, Math.max(0, parseInt(load('echo-page-theme', '0'), 10) || 0));
+  var theme = Math.min(THEMES.length - 1, Math.max(0, parseInt(load('dejadot-page-theme', '0'), 10) || 0));
 
   var swatchBox = document.getElementById('swatches');
   THEMES.forEach(function (t, i) {
@@ -558,8 +658,8 @@ footer a:hover { color: var(--you); }
     b.style.setProperty('--s-ghost', t[9]);
     b.style.setProperty('--s-coin', t[10]);
     b.innerHTML = '<div class="mini"><i></i><i></i><i></i><i></i></div><span>' + t[0] +
-      '<small>' + (t[1] ? 'Unlocks at ' + t[1] : 'Default') + '</small></span>';
-    b.addEventListener('click', function () { theme = i; save('echo-page-theme', String(i)); applyTheme(); });
+      '<small>' + (t[1] ? t[1] + ' coins' : 'Free') + '</small></span>';
+    b.addEventListener('click', function () { theme = i; save('dejadot-page-theme', String(i)); applyTheme(); });
     swatchBox.appendChild(b);
   });
 
@@ -584,7 +684,7 @@ footer a:hover { color: var(--you); }
   // Links straight to the APK in the newest release; falls back to the releases page.
   var apkBtn = document.getElementById('apkBtn');
   if (apkBtn && window.fetch) {
-    fetch('https://api.github.com/repos/julyamba/echo-page/releases/latest')
+    fetch('https://api.github.com/repos/julyamba/dejadot-page/releases/latest')
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (rel) {
         if (!rel || !rel.assets) return;
@@ -643,13 +743,13 @@ footer a:hover { color: var(--you); }
 
   function showCard(html) { card.innerHTML = html; overlay.classList.add('on'); }
   function showTitle() {
-    showCard('<h3>Echo</h3><p>Grab the coin. Your last run comes back as an echo.</p>' +
+    showCard('<h3>Dejadot</h3><p>Grab the coin. Your last run comes back as a shadow.</p>' +
       '<span class="go">' + (coarse ? 'Tap to play' : 'Click to play') + '</span>');
   }
   function showOver() {
     if (state !== 'over') return;
     showCard('<span class="label why">' +
-      (cause === 'echo' ? 'Caught by your echo from round ' + (killer + 1) : 'Out of time') + '</span>' +
+      (cause === 'echo' ? 'Caught by your shadow from round ' + (killer + 1) : 'Out of time') + '</span>' +
       '<div class="big">' + score + '</div><span class="label">' + (score === 1 ? 'coin' : 'coins') + '</span>' +
       '<span class="go">' + (coarse ? 'Tap to retry' : 'Click to retry') + '</span>');
   }
@@ -678,11 +778,12 @@ footer a:hover { color: var(--you); }
     overlay.classList.remove('on');
     toIntro();
   }
+  var coinAt = 0;
   function toIntro() {
     state = 'intro';
     introT = round === 1 ? 0.8 : 1.05;
     frame = 0; rec = new Float32Array(FRAMES * 2); got = false;
-    coin = spawnCoin();
+    coin = spawnCoin(); coinAt = t;
     tx = px; ty = py;
     hud();
   }
@@ -744,6 +845,42 @@ footer a:hover { color: var(--you); }
     for (var f = from + 1; f <= to; f++) ctx.lineTo(arr[f * 2], arr[f * 2 + 1]);
     ctx.strokeStyle = color; ctx.lineWidth = width; ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.stroke();
   }
+  // The app's coin: a halo, then a rimmed face with an inner ring and a shine that turns like a tossed coin.
+  function shade(hex, k) {
+    var n = parseInt(hex.slice(1), 16);
+    return 'rgb(' + Math.round((n >> 16) * k) + ',' + Math.round(((n >> 8) & 255) * k) + ',' + Math.round((n & 255) * k) + ')';
+  }
+  function oval(x, y, rx, ry) { ctx.beginPath(); ctx.ellipse(x, y, Math.max(rx, 0.01), ry, 0, 0, Math.PI * 2); }
+  function drawCoin(x, y, r, time) {
+    dot(x, y, r * 2.3, rgba(C.coin, 0.10)); dot(x, y, r * 1.6, rgba(C.coin, 0.18));
+    var turn = reduced ? 1 : Math.cos(time * 4), w = 0.2 + 0.8 * Math.abs(turn);
+    oval(x, y, r * w, r); ctx.fillStyle = shade(C.coin, 0.65); ctx.fill();
+    var fr = r * 0.78; oval(x, y, fr * w, fr); ctx.fillStyle = turn < 0 ? shade(C.coin, 0.85) : C.coin; ctx.fill();
+    var ir = r * 0.45; oval(x, y, ir * w, ir); ctx.strokeStyle = shade(C.coin, 0.65); ctx.lineWidth = 0.45; ctx.stroke();
+    var sr = r * 0.2; oval(x - r * 0.38 * w, y - r * 0.38, sr * w, sr); ctx.fillStyle = 'rgba(255,255,255,.7)'; ctx.fill();
+  }
+  function coinPop(age) {
+    if (reduced || age >= 0.3) return 1;
+    var q = Math.max(0, age / 0.3) - 1;
+    return 1 + 2.70158 * q * q * q + 1.70158 * q * q;
+  }
+  function spawnRings(x, y, age) {
+    if (age < 0 || age >= 0.8) return;
+    ctx.lineWidth = 0.7;
+    if (reduced) {
+      ctx.beginPath(); ctx.arc(x, y, COIN_R + 4, 0, Math.PI * 2);
+      ctx.strokeStyle = rgba(C.coin, 0.5 * (1 - age / 0.8)); ctx.stroke();
+      return;
+    }
+    for (var i = 0; i < 2; i++) {
+      var q = (age - i * 0.18) / 0.6;
+      if (q <= 0 || q >= 1) continue;
+      var e = 1 - (1 - q) * (1 - q);
+      ctx.beginPath(); ctx.arc(x, y, COIN_R + 1 + 14 * e, 0, Math.PI * 2);
+      ctx.strokeStyle = rgba(C.coin, 0.8 * (1 - q)); ctx.stroke();
+    }
+  }
+
   var DEMO = [[0.9, 1.3, 0.0, 1.1], [1.2, 0.7, 2.0, 0.3], [0.6, 1.1, 4.1, 2.2], [1.4, 0.9, 1.0, 3.7]];
 
   function render() {
@@ -783,10 +920,11 @@ footer a:hover { color: var(--you); }
 
     if (!got) {
       var pulse = reduced ? 0 : Math.sin(t * 6) * 0.4;
+      var age = t - coinAt;
+      spawnRings(coin.x, coin.y, age);
       ctx.beginPath(); ctx.arc(coin.x, coin.y, COIN_R + 2.2 + pulse, 0, Math.PI * 2);
       ctx.strokeStyle = rgba(C.coin, 0.35); ctx.lineWidth = 0.5; ctx.stroke();
-      glow(coin.x, coin.y, COIN_R, C.coin);
-      dot(coin.x - 0.8, coin.y - 0.8, 0.8, 'rgba(255,255,255,.7)');
+      drawCoin(coin.x, coin.y, COIN_R * coinPop(age), t);
     }
 
     ghosts.forEach(function (g, i) {
@@ -816,7 +954,7 @@ footer a:hover { color: var(--you); }
       ctx.font = '500 3.6px "JetBrains Mono", monospace';
       ctx.fillStyle = rgba(ghosts.length ? C.ghost : C.muted, a);
       var n = ghosts.length;
-      ctx.fillText(n === 0 ? 'NO ECHOES YET' : n === 1 ? '1 ECHO WILL FOLLOW YOU' : n + ' ECHOES WILL FOLLOW YOU', 50, 74);
+      ctx.fillText(n === 0 ? 'NO SHADOWS YET' : n === 1 ? '1 SHADOW WILL FOLLOW YOU' : n + ' SHADOWS WILL FOLLOW YOU', 50, 74);
     }
   }
 
